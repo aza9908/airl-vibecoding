@@ -73,7 +73,7 @@ D) Свой вариант
 ### Шаг 3. Вставьте одну команду
 
 ```bash
-cd ~/Downloads && git clone https://github.com/aza9908/airl-skills.git && cd airl-skills && bash install.sh
+cd ~/Downloads && git clone https://github.com/aza9908/airl-vibecoding.git && cd airl-vibecoding && bash install.sh
 ```
 
 Должно появиться: `Готово. Установлены навыки AIRL`.
@@ -197,7 +197,7 @@ ls ~/.claude/skills
 ## Обновление
 
 ```bash
-cd ~/Downloads/airl-skills && git pull && bash install.sh
+cd ~/Downloads/airl-vibecoding && git pull && bash install.sh
 ```
 
 И снова перезагрузите окно VS Code.
