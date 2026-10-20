@@ -1,0 +1,12 @@
+{
+  "name": "airl",
+  "description": "Навыки AI Research Labs для вайб-кодинга с Claude",
+  "owner": { "name": "AI Research Labs", "url": "https://airl.kz" },
+  "plugins": [
+    {
+      "name": "airl",
+      "source": "./",
+      "description": "airl-start, airl-design, airl-architecture, airl-security, airl-deploy, airl-code-review"
+    }
+  ]
+}
