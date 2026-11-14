@@ -2,6 +2,19 @@
 
 Единственная площадка AIRL. Закрывает сайт, данные, вход по логину и серверную логику в одном месте.
 
+## Если в проекте есть `scripts/airl-firebase.mjs`
+
+Его кладёт туда `/airl-architecture`. Тогда всё проще — используй его, а не ручные шаги ниже:
+
+```bash
+node scripts/airl-firebase.mjs doctor          # всё ли готово
+node scripts/airl-firebase.mjs domain shop.kz  # разрешить вход со своего домена
+node scripts/airl-firebase.mjs deploy          # сборка + сайт + правила + вход
+```
+
+`deploy` сам откажется публиковать, если в `.env.local` включены эмуляторы.
+Учебный проект (`demo-…`) публиковать нельзя: сначала `setup --project <id>`.
+
 ## Предупреди человека до начала
 
 ```
