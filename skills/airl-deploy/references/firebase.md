@@ -1,6 +1,6 @@
 # Firebase
 
-Закрывает и сайт, и данные одной пачкой. Самый короткий путь для большинства проектов.
+Единственная площадка AIRL. Закрывает сайт, данные, вход по логину и серверную логику в одном месте.
 
 ## Предупреди человека до начала
 
@@ -19,6 +19,7 @@ Firebase — сервис Google. Нужен обычный аккаунт Googl
 
 - аккаунт Google
 - проект в консоли Firebase (`console.firebase.google.com` → Add project)
+  или создай его сам: `firebase projects:create`
 - **номер проекта** (Project ID) — точная строка из настроек, не название
 
 ## Установка и вход
@@ -33,8 +34,12 @@ firebase login
 ## Настройка
 
 ```bash
-firebase init hosting
+firebase use --add            # привязать папку к проекту
+firebase init hosting         # плюс firestore, storage, functions — что использует продукт
 ```
+
+Нужен сервер (Next.js с серверной частью) — вместо `hosting` используй App Hosting:
+`firebase init apphosting` (тариф Blaze). Публикация — `firebase deploy --only apphosting`.
 
 На вопросы отвечай, сверяясь с проектом:
 
@@ -89,11 +94,39 @@ firebase deploy --only firestore:rules
 
 Проверь, что нигде не осталось `allow read, write: if true` — это открытая дверь.
 
+## Вход по логину — Firebase Authentication
+
+Если в продукте есть вход:
+
+1. Консоль Firebase → Authentication → Get started.
+2. Sign-in method → включи ровно те способы, что есть на экранах из `DESIGN.md`:
+   почта и пароль, Google, телефон. Лишние не включай.
+3. Settings → **Authorized domains** — должны быть `номер-проекта.web.app`,
+   `номер-проекта.firebaseapp.com` и свой домен, если есть. Без этого на живом адресе
+   вход падает с ошибкой `auth/unauthorized-domain`.
+4. Вход по телефону — предупреди: SMS платные, нужен тариф Blaze и App Check, иначе
+   боты накрутят счёт.
+5. В правилах Firestore и Storage доступ проверяется через `request.auth` — вход без
+   правил ничего не защищает.
+
+Проверь на живом адресе: регистрация, выход, повторный вход.
+
+## Серверная логика — Cloud Functions
+
+Нужна для оплаты, писем, работы с секретными ключами. Требует тариф Blaze.
+
+```bash
+firebase functions:secrets:set PAYMENT_API_KEY   # значение вводит человек, не ты
+firebase deploy --only functions
+```
+
+Секреты — только через `functions:secrets:set`, никогда в код и не в `.env` в репозитории.
+
 ## Свой домен
 
 Консоль Firebase → Hosting → Add custom domain. Firebase выдаст записи, которые
-нужно прописать у регистратора домена. Для домена в зоне .kz, купленного на ps.kz, —
-в личном кабинете ps.kz.
+нужно прописать у регистратора домена. Для домена в зоне .kz — в личном кабинете регистратора,
+где куплен домен. После подключения добавь домен в Authorized domains Authentication.
 
 Скажи человеку: адрес заработает не мгновенно, обновление может занять до суток.
 Это нормально, чинить нечего.
