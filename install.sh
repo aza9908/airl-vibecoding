@@ -17,6 +17,8 @@ echo "    /airl-security       шаг 3 — можно ли показывать
 echo "    /airl-deploy         публикация в интернете по ссылке"
 echo "    /airl-code-review    проверка кода — где сломается и где страшно менять"
 echo ""
+echo "  В конце /airl-start собирает BUSINESS-ARCHITECTURE.md для разработчика."
+echo ""
 echo "  Осталось два шага:"
 echo "    1. В VS Code: Cmd+Shift+P -> Developer: Reload Window"
 echo "    2. В панели Claude наберите /airl-start"
